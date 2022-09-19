@@ -16,7 +16,7 @@ func main() {
 }
 ```
 ### Output
-<p align="center">
+<p align="left">
 <img 
     src="example.png" 
     width="720" height="360" border="0" alt="evio">
