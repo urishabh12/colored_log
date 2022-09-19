@@ -19,7 +19,7 @@ func main() {
 <p align="left">
 <img 
     src="example.png" 
-    width="720" height="360" border="0" alt="evio">
+    width="720" height="260" border="0" alt="evio">
 </p>
 
 <p align="center"><a href="https://godoc.org/github.com/urishabh12/colored_log"><img src="https://img.shields.io/badge/api-reference-blue.svg?style=flat-square" alt="GoDoc"></a></p>
