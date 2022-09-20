@@ -1,6 +1,7 @@
 package colored_log
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -26,15 +27,17 @@ type ColoredLogger struct {
 	mu    sync.Mutex
 }
 
-func New(out io.Writer, default_color string, success_color string, error_color string, flag int) *ColoredLogger {
+func New(out io.Writer, prefix string, default_color string, success_color string, error_color string, flag int) *ColoredLogger {
 	return &ColoredLogger{
-		ldef:  log.New(os.Stdout, default_color, flag),
-		lsucc: log.New(os.Stdout, success_color, flag),
-		lerr:  log.New(os.Stdout, error_color, flag),
+		ldef:  log.New(os.Stdout, fmt.Sprint(default_color, prefix), flag),
+		lsucc: log.New(os.Stdout, fmt.Sprint(success_color, prefix), flag),
+		lerr:  log.New(os.Stdout, fmt.Sprint(error_color, prefix), flag),
+		flags: flag,
+		out:   out,
 	}
 }
 
-var std_log = New(os.Stdout, ColorBlue, ColorGreen, ColorRed, log.LstdFlags)
+var std_log = New(os.Stdout, "", ColorBlue, ColorGreen, ColorRed, log.LstdFlags)
 
 func (l *ColoredLogger) Print(a ...interface{}) {
 	l.mu.Lock()
@@ -113,9 +116,13 @@ func (l *ColoredLogger) Flags() int {
 	return l.flags
 }
 
-//Placeholder
+// Sets log flag to input
 func (l *ColoredLogger) SetFlags(i int) {
-	//DO Nothing
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.ldef.SetFlags(i)
+	l.lsucc.SetFlags(i)
+	l.lerr.SetFlags(i)
 }
 
 func (l *ColoredLogger) Prefix() string {
@@ -133,12 +140,16 @@ func (l *ColoredLogger) Writer() io.Writer {
 	return l.out
 }
 
-//Placeholder
+// Sets outputs of all types of logs to input wirter
 func (l *ColoredLogger) SetOutput(w io.Writer) {
-	//Do Nothing
+	l.mu.Lock()
+	defer l.mu.Unlock()
+	l.ldef.SetOutput(w)
+	l.lsucc.SetOutput(w)
+	l.lerr.SetOutput(w)
 }
 
-// Placeholder
+// Sets outputs of all types of logs to input wirter
 func SetOutput(w io.Writer) {
 	std_log.SetOutput(w)
 }
@@ -149,7 +160,7 @@ func Flags() int {
 	return std_log.Flags()
 }
 
-//Placeholder
+// Sets log flag to input
 func SetFlags(flag int) {
 	std_log.SetFlags(flag)
 }
