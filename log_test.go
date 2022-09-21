@@ -29,22 +29,22 @@ func Test_Deafult_STD(t *testing.T) {
 	//Print()
 	Print(output)
 	s := strings.Split(string(out.data), log_seperator)
-	if s[0] != fmt.Sprint(ColorBlue, output) {
-		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(ColorBlue, output))
+	if s[0] != fmt.Sprint(Blue, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Blue, output))
 	}
 	//Println()
 	out.data = []byte{}
 	Println(output)
 	s = strings.Split(string(out.data), log_seperator)
-	if s[0] != fmt.Sprint(ColorBlue, output) {
-		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(ColorBlue, output))
+	if s[0] != fmt.Sprint(Blue, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Blue, output))
 	}
 	//Printf()
 	out.data = []byte{}
 	Printf(output)
 	s = strings.Split(string(out.data), log_seperator)
-	if s[0] != fmt.Sprint(ColorBlue, output) {
-		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(ColorBlue, output))
+	if s[0] != fmt.Sprint(Blue, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Blue, output))
 	}
 }
 
@@ -56,21 +56,21 @@ func Test_Success_STD(t *testing.T) {
 	//Success()
 	Success(output)
 	s := strings.Split(string(out.data), log_seperator)
-	if s[0] != fmt.Sprint(ColorGreen, output) {
-		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(ColorBlue, output))
+	if s[0] != fmt.Sprint(Green, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Green, output))
 	}
 	//Successln()
 	out.data = []byte{}
 	Successln(output)
 	s = strings.Split(string(out.data), log_seperator)
-	if s[0] != fmt.Sprint(ColorGreen, output) {
-		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(ColorBlue, output))
+	if s[0] != fmt.Sprint(Green, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Green, output))
 	}
 	//Successf()
 	out.data = []byte{}
 	Successf(output)
 	s = strings.Split(string(out.data), log_seperator)
-	if s[0] != fmt.Sprint(ColorGreen, output) {
-		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(ColorBlue, output))
+	if s[0] != fmt.Sprint(Green, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Green, output))
 	}
 }

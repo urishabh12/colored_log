@@ -9,13 +9,13 @@ import (
 )
 
 const (
-	ColorRed    = "\033[31m"
-	ColorGreen  = "\033[32m"
-	ColorYellow = "\033[33m"
-	ColorBlue   = "\033[34m"
-	ColorPurple = "\033[35m"
-	ColorCyan   = "\033[36m"
-	ColorWhite  = "\033[37m"
+	Red    = "\033[31m"
+	Green  = "\033[32m"
+	Yellow = "\033[33m"
+	Blue   = "\033[34m"
+	Purple = "\033[35m"
+	Cyan   = "\033[36m"
+	White  = "\033[37m"
 )
 
 type ColoredLogger struct {
@@ -37,7 +37,7 @@ func New(out io.Writer, prefix string, default_color string, success_color strin
 	}
 }
 
-var std_log = New(os.Stdout, "", ColorBlue, ColorGreen, ColorRed, log.LstdFlags)
+var std_log = New(os.Stdout, "", Blue, Green, Red, log.LstdFlags)
 
 func (l *ColoredLogger) Print(a ...interface{}) {
 	l.mu.Lock()
