@@ -132,6 +132,7 @@ func (l *ColoredLogger) Flags() int {
 func (l *ColoredLogger) SetFlags(i int) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	l.flags = i
 	l.ldef.SetFlags(i)
 	l.lsucc.SetFlags(i)
 	l.lerr.SetFlags(i)
