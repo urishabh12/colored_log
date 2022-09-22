@@ -164,6 +164,7 @@ func (l *ColoredLogger) Writer() io.Writer {
 func (l *ColoredLogger) SetOutput(w io.Writer) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	l.out = w
 	l.ldef.SetOutput(w)
 	l.lsucc.SetOutput(w)
 	l.lerr.SetOutput(w)

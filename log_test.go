@@ -21,6 +21,48 @@ func (s *StringWriter) Write(p []byte) (n int, err error) {
 	return len(p), nil
 }
 
+func Test_Flags(t *testing.T) {
+	flag := 1
+	SetFlags(flag)
+
+	if flag != Flags() {
+		t.Errorf("output are not same %d != %d", flag, Flags())
+	}
+}
+
+func Test_SetFlags(t *testing.T) {
+	output := "Hello"
+	out := &StringWriter{}
+	SetFlags(0)
+	SetOutput(out)
+	Print(output)
+	s := strings.Split(string(out.data), log_seperator)
+	if s[0] != fmt.Sprint(Blue, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Blue, output))
+	}
+}
+
+func Test_Writer(t *testing.T) {
+	out := &StringWriter{}
+	SetOutput(out)
+
+	if out != Writer() {
+		t.Error("returned writer was not same as set writer")
+	}
+}
+
+func Test_Output(t *testing.T) {
+	output := "Hello"
+	out := &StringWriter{}
+	SetOutput(out)
+	SetFlags(0)
+	Output(0, output)
+	s := strings.Split(string(out.data), log_seperator)
+	if s[0] != fmt.Sprint(Blue, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Blue, output))
+	}
+}
+
 func Test_SetOutput(t *testing.T) {
 	out := &StringWriter{}
 	SetFlags(0)
@@ -107,27 +149,6 @@ func Test_SetPrefix(t *testing.T) {
 	s := strings.Split(string(out.data), log_seperator)
 	if s[0] != fmt.Sprint(Blue, prefix, output) {
 		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Blue, prefix, output))
-	}
-}
-
-func Test_Flags(t *testing.T) {
-	flag := 1
-	SetFlags(flag)
-
-	if flag != Flags() {
-		t.Errorf("output are not same %d != %d", flag, Flags())
-	}
-}
-
-func Test_SetFlags(t *testing.T) {
-	output := "Hello"
-	out := &StringWriter{}
-	SetFlags(0)
-	SetOutput(out)
-	Print(output)
-	s := strings.Split(string(out.data), log_seperator)
-	if s[0] != fmt.Sprint(Blue, output) {
-		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Blue, output))
 	}
 }
 
