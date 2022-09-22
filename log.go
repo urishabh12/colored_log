@@ -147,6 +147,7 @@ func (l *ColoredLogger) Prefix() string {
 func (l *ColoredLogger) SetPrefix(s string) {
 	l.mu.Lock()
 	defer l.mu.Unlock()
+	l.prefix = s
 	l.ldef.SetPrefix(fmt.Sprint(l.defColor, s))
 	l.lsucc.SetPrefix(fmt.Sprint(l.succColor, s))
 	l.lerr.SetPrefix(fmt.Sprint(l.errColor, s))

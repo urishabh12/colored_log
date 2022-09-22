@@ -74,3 +74,26 @@ func Test_Success_STD(t *testing.T) {
 		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Green, output))
 	}
 }
+
+func Test_Prefix(t *testing.T) {
+	prefix := "prefix"
+	SetPrefix(prefix)
+
+	if prefix != Prefix() {
+		t.Errorf("output are not same %s != %s", prefix, Prefix())
+	}
+}
+
+func Test_SetPrefix(t *testing.T) {
+	prefix := "prefix"
+	output := "Hello"
+	out := &StringWriter{}
+	SetFlags(0)
+	SetOutput(out)
+	SetPrefix(prefix)
+	Print(output)
+	s := strings.Split(string(out.data), log_seperator)
+	if s[0] != fmt.Sprint(Blue, prefix, output) {
+		t.Errorf("output are not same %s != %s", s[0], fmt.Sprint(Blue, prefix, output))
+	}
+}
